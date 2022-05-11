@@ -1,11 +1,12 @@
-import { useContext } from "react";
-import PhoneContext from "../../contexts/PhoneContext";
+import { useSelector } from "react-redux";
+
 import Action from "../Action/Action";
 import Display from "../Display/Display";
 
 const Actions = () => {
-  const { calling, phoneNumber, call, hang } = useContext(PhoneContext);
-
+  const { calling, phoneNumber, call, hang } = useSelector(
+    (state) => state.phone
+  );
   return (
     <>
       <Display />

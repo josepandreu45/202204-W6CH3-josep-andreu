@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { addDigitActionCreator } from "../../redux/features/phoneSlice";
+import {
+  addDigitActionCreator,
+  removeLastDigitActionCreator,
+} from "../../redux/features/phoneSlice";
 import Key from "../Key/Key";
 
 const Keyboard = () => {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-  const { phoneNumber, calling } = useSelector((state) => state.phone);
+  const { calling } = useSelector((state) => state.phone);
   const dispatch = useDispatch();
 
   return (
@@ -15,13 +18,13 @@ const Keyboard = () => {
           key={number}
           text={number}
           disabled={calling}
-          actionOnClick={() => dispatch(addDigitActionCreator(phoneNumber))}
+          actionOnClick={() => dispatch(addDigitActionCreator(number))}
         />
       ))}
       <Key
         text="delete"
         big={true}
-        // actionOnClick={removeLastDigit}
+        actionOnClick={() => dispatch(removeLastDigitActionCreator())}
         disabled={calling}
       />
     </ol>
