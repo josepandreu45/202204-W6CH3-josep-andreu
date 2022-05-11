@@ -7,13 +7,27 @@ const phoneSlice = createSlice({
     phoneNumber: [],
   },
   reducers: {
-    addDigit: (phone, action) => ({
+    addDigit: (state, action) => ({
+      ...state,
+      phoneNumber: [...state.phoneNumber, action.payload],
+    }),
+    removeLastDigit: (phone) => ({
       ...phone,
-      phoneNumber: [...phone.phoneNumber, action.payload],
+      phoneNumber: [...phone.phoneNumber].slice(
+        0,
+        phone.phoneNumber.length - 1
+      ),
+    }),
+    resetNumber: (phone) => ({
+      ...phone,
+      phoneNumber: [],
     }),
   },
 });
 
-export const { addDigit: addDigitActionCreator } = phoneSlice.actions;
+export const {
+  addDigit: addDigitActionCreator,
+  removeLastDigit: removeLastDigitActionCreator,
+} = phoneSlice.actions;
 
 export default phoneSlice.reducer;
